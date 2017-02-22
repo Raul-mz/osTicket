@@ -26,7 +26,14 @@ Bootstrap::defineTables(TABLE_PREFIX);
 Bootstrap::i18n_prep();
 Bootstrap::loadCode();
 Bootstrap::connect();
+    ini_set('allow_url_fopen', 1);
+    ini_set('allow_url_include', 1);
+    ini_set('session.cache_limiter', 'nocache');
+#Global override
+$_SERVER['REMOTE_ADDR'] = osTicket::get_client_ip();
 
+    ini_set('allow_url_fopen', 1);
+    ini_set('allow_url_include', 1);
 if(!($ost=osTicket::start()) || !($cfg = $ost->getConfig()))
 Bootstrap::croak(__('Unable to load config info from DB. Get tech support.'));
 
